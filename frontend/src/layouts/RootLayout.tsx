@@ -35,6 +35,7 @@ export default function RootLayout() {
   
   const location = useLocation();
   const navigate = useNavigate();
+  const isAppView = location.pathname === '/dashboard' || location.pathname === '/job-match';
   
   // Navigation toggles
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -54,12 +55,41 @@ export default function RootLayout() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Manage body scroll locking to prevent background scrolling (scroll leak) on mobile/tablet
+  useEffect(() => {
+    const isLocked = isAppView && ((isAssistantOpen && isTablet) || (isMobileMenuOpen && isMobile));
+    
+    if (isLocked) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isAppView, isAssistantOpen, isTablet, isMobileMenuOpen, isMobile]);
+
+  // Escape key event listener to close drawers globally
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (isMobileMenuOpen) {
+          setIsMobileMenuOpen(false);
+        }
+        if (isAssistantOpen) {
+          setIsAssistantOpen(false);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen, isAssistantOpen]);
   
   // Rename state
   const [renameId, setRenameId] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState('');
-
-  const isAppView = location.pathname === '/dashboard' || location.pathname === '/job-match';
 
   const handleReset = () => {
     clearState();
@@ -313,7 +343,7 @@ export default function RootLayout() {
                   key="mobile-menu-backdrop"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  exit={{ opacity: 0, pointerEvents: 'none' }}
                   transition={{ duration: 0.2 }}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-40 pointer-events-auto"
@@ -328,7 +358,7 @@ export default function RootLayout() {
                   key="mobile-nav-drawer"
                   initial={{ x: '-100%' }}
                   animate={{ x: 0 }}
-                  exit={{ x: '-100%' }}
+                  exit={{ x: '-100%', pointerEvents: 'none' }}
                   transition={{ type: 'spring', damping: 25 }}
                   className={`fixed inset-y-0 left-0 w-64 border-r z-50 flex flex-col p-4 ${
                     theme === 'dark' ? 'bg-[#09090b] border-zinc-850' : 'bg-[#FFFFFF] border-zinc-200'
@@ -490,7 +520,7 @@ export default function RootLayout() {
                     key="assistant-backdrop"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    exit={{ opacity: 0, pointerEvents: 'none' }}
                     transition={{ duration: 0.2 }}
                     onClick={() => setIsAssistantOpen(false)}
                     className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-40 pointer-events-auto"
@@ -505,7 +535,7 @@ export default function RootLayout() {
                     key="assistant-aside"
                     initial={isTablet ? { x: '100%', opacity: 0 } : { width: 0, opacity: 0 }}
                     animate={isTablet ? { x: 0, opacity: 1 } : { width: 320, opacity: 1 }}
-                    exit={isTablet ? { x: '100%', opacity: 0 } : { width: 0, opacity: 0 }}
+                    exit={isTablet ? { x: '100%', opacity: 0, pointerEvents: 'none' } : { width: 0, opacity: 0, pointerEvents: 'none' }}
                     transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                     className={`fixed inset-y-0 right-0 z-50 w-80 flex flex-col border-l shadow-2xl lg:shadow-none lg:static lg:z-30 lg:h-screen lg:sticky lg:top-0 overflow-hidden ${
                       theme === 'dark' 
