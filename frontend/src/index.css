@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@config "../tailwind.config.js";
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  margin: 0;
+  background-color: #09090b;
+  color: #f4f4f5;
+  font-family: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.light body {
+  background-color: #FAFAFA;
+  color: #09090B;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+html.light ::-webkit-scrollbar-track {
+  background: #FAFAFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #e4e4e7;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d8;
+}
+
+/* Subtle dot grid background (Vercel-inspired) */
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+html.light .bg-dot-grid {
+  background-image: radial-gradient(rgba(9, 9, 11, 0.05) 1px, transparent 1px);
+}
+
+/* Premium text styling */
+.text-editorial {
+  font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Elegant borders (Linear/Stripe style) */
+.border-premium {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel {
+  background: rgba(18, 18, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Glow lines */
+.glow-border-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glow-border-hover:hover {
+  border-color: rgba(167, 139, 250, 0.25);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.05);
+}
+
+/* Selections */
+::selection {
+  background: rgba(139, 92, 246, 0.2);
+  color: #f5f5f7;
+}
+
+/* Custom animation classes */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
+}
+
+/* Print optimizations for PDF export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #18181b !important;
+  }
+  
+  header, aside, footer, button, .no-print, nav, .ai-assistant-toggle {
+    display: none !important;
+  }
+  
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .glass-panel {
+    background: transparent !important;
+    border: 1px solid #e4e4e7 !important;
+    box-shadow: none !important;
+    color: #18181b !important;
+    backdrop-filter: none !important;
+  }
+
+  .text-zinc-400, .text-zinc-500, .text-zinc-450 {
+    color: #52525b !important;
+  }
+
+  .text-white, .text-zinc-200, .text-zinc-300 {
+    color: #18181b !important;
+  }
+
+  .border-zinc-900, .border-zinc-850, .border-zinc-800 {
+    border-color: #e4e4e7 !important;
+  }
+
+  .bg-dot-grid, [class*="glow-bg-"] {
+    background-image: none !important;
+    background: none !important;
+  }
+}
+

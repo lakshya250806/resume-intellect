@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+pdfplumber
+python-docx
+regex
+python-dotenv
+google-generativeai
