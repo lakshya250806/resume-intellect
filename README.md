@@ -1,46 +1,88 @@
 # ResumeIntellect 🧠💼
 
-> **Production-Grade AI-Powered Resume Parser, ATS Scorer, and Career Optimization Suite.**
+![React](https://img.shields.io/badge/React-19-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Python-green)
+![Gemini](https://img.shields.io/badge/Gemini-2.5_Flash-orange)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-ResumeIntellect is a high-fidelity application designed to parse layout structures, extract hidden metadata, evaluate resume compliance against applicant tracking system (ATS) algorithms, and deliver interactive, AI-driven career optimization tools. Powered by Google's **Gemini 2.5 Flash** and a robust **FastAPI + React** stack, it provides job seekers with real-time feedback to optimize their professional profiles.
+> AI-powered resume analyzer with ATS scoring, job matching, cover letter generation, interview preparation, and intelligent career assistance.
 
----
+ResumeIntellect is an AI-powered career optimization platform that helps candidates improve their resumes using ATS scoring, job description matching, AI-generated cover letters, and personalized interview preparation.
 
-## 🚀 Key Features
-
-*   **Intelligent Resume Parsing**: Extracted text deconstruction from PDF and Word (`.docx`) files using structural layout indexing and heuristic algorithms.
-*   **ATS Score Analysis**: Computes a detailed, weighted ATS score based on formatting density, section completeness, contact syntax, skill keyword match rates, and career progression impact.
-*   **Job Description (JD) Alignment**: Calculates keyword semantic compatibility against target job listings, highlights missing skills, and suggests resume bullet points to bridge the gap.
-*   **AI Resume Assistant**: Interactive, drawer-based chat interface allowing candidates to converse directly with their resume context to get optimization suggestions.
-*   **Cover Letter Generator**: Drafts tailored cover letters based on candidate metadata and job postings, adjustable across *professional*, *bold*, and *technical* tones.
-*   **Interview Preparation Generator**: Curates custom mock interview questions (Technical, Project-based, Behavioral, and HR) with corresponding answer strategies.
-*   **Shareable Reports**: Serializes analysis results into a compact Base64 URL payload, enabling read-only sharing without server-side database dependencies.
-*   **Modern UI with Dark & Light Themes**: Sleek dashboard containing responsive visualizations (ATS breakdowns, domain coverage radar charts) and a clean, responsive layout.
+Built with **FastAPI**, **React**, and **Gemini 2.5 Flash**, it provides real-time insights to help users stand out in the hiring process.
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
 
-### Frontend
-*   **React 19 & TypeScript**: Component layer and strict type safety.
-*   **Vite**: Fast, module-based bundler and dev server.
-*   **Tailwind CSS**: Modern, utility-first UI styling.
-*   **Recharts**: SVG-based responsive data visualizations (radar charts, bar charts, and pie charts).
-*   **Framer Motion**: Smooth interface transitions and micro-animations.
-*   **Lucide React**: Premium vector icons.
-
-### Backend
-*   **FastAPI**: High-performance, asynchronous web server framework.
-*   **Python**: Core programming language.
-*   **Google Gemini 2.5 Flash API**: Powers deep contextual analysis, document generation, and chat assistants.
-*   **pdfplumber & python-docx**: Direct text and table extractors for PDF and Word documents.
-*   **Pydantic**: Structural validation and request schemas.
+| Feature | Status |
+|----------|---------|
+| Resume Parsing | ✅ |
+| ATS Score Analysis | ✅ |
+| Job Description Match | ✅ |
+| AI Resume Assistant | ✅ |
+| Cover Letter Generator | ✅ |
+| Interview Question Generator | ✅ |
+| Shareable Reports | ✅ |
+| Dark & Light Themes | ✅ |
 
 ---
 
-## 📐 Architecture Overview
+# 🚀 Key Features
 
-ResumeIntellect follows a decoupled client-server architecture:
+### 📄 Intelligent Resume Parsing
+Extracts and processes text from PDF and DOCX resumes using structural layout analysis and heuristic algorithms.
+
+### 📊 ATS Score Analysis
+Calculates a weighted ATS score based on formatting, section completeness, keywords, and overall resume quality.
+
+### 🎯 Job Description Matching
+Compares resumes against target job descriptions, identifies missing keywords, and suggests improvements.
+
+### 🤖 AI Resume Assistant
+Interactive AI chat assistant that provides resume optimization suggestions using Gemini 2.5 Flash.
+
+### ✉️ Cover Letter Generator
+Generates tailored cover letters in different tones such as Professional, Technical, and Bold.
+
+### 🎤 Interview Preparation Generator
+Creates personalized technical, behavioral, project-based, and HR interview questions.
+
+### 🔗 Shareable Reports
+Allows users to share analysis results using compact URL-based report serialization.
+
+### 🌙 Modern UI
+Responsive dashboard with elegant dark and light themes, charts, and interactive visualizations.
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Recharts
+- Lucide React
+
+## Backend
+
+- FastAPI
+- Python
+- Gemini 2.5 Flash API
+- pdfplumber
+- python-docx
+- Pydantic
+
+---
+
+# 📐 Architecture
+
+ResumeIntellect follows a decoupled client-server architecture.
 
 ```mermaid
 graph TD
@@ -51,103 +93,209 @@ graph TD
     Client -->|Local Storage| History[Resume History Cache]
 ```
 
-1.  **Parsing Pipeline**: Documents are verified at the gateway (under 10MB, valid extensions) and written to memory/temporary paths. Text and tables are extracted, processed to strip noise, and passed to regex-based heuristic extractors.
-2.  **Analysis and Score Calculation**: The backend runs structure and metadata scans, calculating whitelisted keyword weights and measuring professional highlights. An overall ATS score is computed using weighted category parameters.
-3.  **LLM Enhancement**: Prompt payloads enclosing structural candidate context are sent asynchronously to Gemini 2.5 Flash for chat responses, letter generation, and mock question tailoring.
+### Workflow
+
+1. Resume documents are uploaded and validated.
+2. Text is extracted using PDF and DOCX parsers.
+3. ATS scores and metrics are calculated.
+4. Gemini enhances results through AI-powered analysis.
+5. Interactive reports and recommendations are displayed.
 
 ---
 
-## ⚙️ Installation & Setup
+# 📂 Project Structure
 
-### Prerequisites
-*   **Node.js** (v18+ recommended)
-*   **Python** (v3.9+ recommended)
-*   **Google Gemini API Key** (Get one from [Google AI Studio](https://aistudio.google.com/))
-
-### 1. Backend Setup
-1.  Navigate to the backend directory:
-    ```bash
-    cd backend
-    ```
-2.  Create a virtual environment:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use: venv\Scripts\activate
-    ```
-3.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  Configure environment variables (see below).
-
-### 2. Frontend Setup
-1.  Navigate to the frontend directory:
-    ```bash
-    cd ../frontend
-    ```
-2.  Install packages:
-    ```bash
-    npm install
-    ```
+```text
+AI-Resume-Analyzer
+│
+├── backend
+│   ├── main.py
+│   ├── gemini_service.py
+│   ├── requirements.txt
+│   └── ...
+│
+├── frontend
+│   ├── src
+│   ├── public
+│   ├── package.json
+│   └── ...
+│
+├── README.md
+├── .env.example
+└── .gitignore
+```
 
 ---
 
-## 🔑 Environment Variables
+# 📡 Backend API
 
-Create a `.env` file in the **root** folder (or inside the `backend` folder) with the following content:
+### Health Check
+
+```http
+GET /health
+```
+
+### Upload & Analysis
+
+```http
+POST /upload
+POST /analyze
+POST /ats-score
+POST /jd-match
+```
+
+### AI Services
+
+```http
+POST /generate-cover-letter
+POST /generate-interview-questions
+POST /chat
+```
+
+---
+
+# ⚙️ Installation
+
+## Prerequisites
+
+- Node.js (18+)
+- Python (3.9+)
+- Google Gemini API Key
+
+---
+
+## Backend Setup
+
+```bash
+cd backend
+
+python -m venv venv
+
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
+
+pip install -r requirements.txt
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd frontend
+
+npm install
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file:
 
 ```env
-# Google Gemini API Access Credentials
 GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
-An `.env.example` file is included in both the root and backend directories for reference.
+Example configuration files are included in:
+
+- `.env.example`
+- `backend/.env.example`
 
 ---
 
-## 🏃 Running the Application
+# ▶️ Running the Application
 
-For a fully functional setup, run both the backend and frontend services simultaneously:
+## Start Backend
 
-### Starting the FastAPI Backend
-From the `backend` directory:
 ```bash
+cd backend
+
 uvicorn main:app --reload --host 127.0.0.1 --port 8000
 ```
-*The backend API will run locally at: `http://localhost:8000`*
 
-### Starting the React Frontend
-From the `frontend` directory:
+Backend:
+
+```
+http://localhost:8000
+```
+
+---
+
+## Start Frontend
+
 ```bash
+cd frontend
+
 npm run dev
 ```
-*The frontend application will run locally at: `http://localhost:5173`*
+
+Frontend:
+
+```
+http://localhost:5173
+```
 
 ---
 
-## 📸 Screenshots
+# 🌐 Live Demo
 
-| Feature View | Screenshot Placeholder | Description |
-| :--- | :--- | :--- |
-| **Landing Page** | *`[Placeholder: Landing Page]`* | Drag-and-drop file upload interface with statistics. |
-| **Main Dashboard** | *`[Placeholder: Dashboard Overview]`* | Interactive ATS Gauge, strengths, gaps, and roadmap visualizations. |
-| **Domain Coverage** | *`[Placeholder: Skill Distribution Radar]`* | Radar chart illustrating parsed competency across categories. |
-| **Job Description Matching** | *`[Placeholder: Job Match Panel]`* | Keyword alignment dial, matching proportion pie chart, and suggestions. |
-| **AI Cover Letter Writer** | *`[Placeholder: Cover Letter Generator]`* | Form selecting letter tone presets and live export previewer. |
-| **AI Mock Interview Prep** | *`[Placeholder: Mock Prep Drawer]`* | Tailwind card lists containing customized questions and revealable answers. |
-| **AI Assistant Chat** | *`[Placeholder: Interactive Assistant Chat]`* | Drawer panel simulating interactive optimization conversation. |
+### Frontend
+
+Coming Soon 🚀
+
+### Backend
+
+Coming Soon 🚀
 
 ---
 
-## 🗺️ Future Roadmap
+# 📸 Screenshots
 
-*   [ ] **OCR PDF Support**: Integrate fallback OCR engines (e.g., Tesseract or Gemini vision models) to parse scanned/image-only PDF resumes.
-*   [ ] **JSON Schema Parsing**: Transition extraction heuristics to full-text structural LLM parsing to increase accuracy on creative layouts.
-*   [ ] **Stateful Rate Limiting**: Migrate in-memory IP mapping to a Redis database to scale instance clusters.
-*   [ ] **Multiple Export Formats**: Enable downloading optimized resumes in standardized DOCX and PDF layouts.
+| Feature | Preview |
+|-----------|---------|
+| Landing Page | *(Coming Soon)* |
+| Dashboard | *(Coming Soon)* |
+| ATS Analysis | *(Coming Soon)* |
+| Job Match | *(Coming Soon)* |
+| Cover Letter Generator | *(Coming Soon)* |
+| Interview Preparation | *(Coming Soon)* |
+| AI Assistant Chat | *(Coming Soon)* |
 
 ---
 
-## 📄 License
+# 🗺 Future Roadmap
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+- [ ] OCR support for scanned PDFs
+- [ ] Resume templates
+- [ ] DOCX/PDF export
+- [ ] Authentication system
+- [ ] Redis-based rate limiting
+- [ ] Database support
+- [ ] Streaming AI responses
+- [ ] Multi-language support
+
+---
+
+# 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+Feel free to fork this repository and submit pull requests.
+
+---
+
+# 📄 License
+
+Distributed under the MIT License.
+
+See the `LICENSE` file for more information.
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a star ⭐ on GitHub.
+
+It helps others discover the project and motivates further development.
