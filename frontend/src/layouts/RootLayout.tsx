@@ -44,12 +44,10 @@ export default function RootLayout() {
   
   // Media query states to prevent exit animation locks on hidden elements
   const [isMobile, setIsMobile] = useState(false); // md breakpoint (< 768px)
-  const [isTablet, setIsTablet] = useState(false); // lg breakpoint (< 1024px)
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      setIsTablet(window.innerWidth < 1024);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -64,41 +62,33 @@ export default function RootLayout() {
     }
   }, [isAppView]);
 
-  // Simple body overflow handling for AI assistant drawer
+  // Debug logging for scroll lock investigation (body overflow manipulation removed)
   useEffect(() => {
-    console.log(`[DEBUG_LOCK] isAssistantOpen: ${isAssistantOpen}`);
-    console.log(`[DEBUG_LOCK] document.body.style.overflow: "${document.body.style.overflow}"`);
-    console.log(`[DEBUG_LOCK] document.documentElement.style.overflow: "${document.documentElement.style.overflow}"`);
-    console.log(`[DEBUG_LOCK] window.scrollY: ${window.scrollY}`);
+    console.log("[DEBUG_LOCK] isAssistantOpen:", isAssistantOpen);
+    console.log("[DEBUG_LOCK] document.body.style.overflow:", document.body.style.overflow);
+    console.log("[DEBUG_LOCK] document.documentElement.style.overflow:", document.documentElement.style.overflow);
+    console.log("[DEBUG_LOCK] window.scrollY:", window.scrollY);
 
-    if (isAssistantOpen) {
-      document.body.style.overflow = 'hidden';
-      console.log(`[DEBUG_LOCK] isAssistantOpen is true: set document.body.style.overflow to 'hidden'. Pathname: ${location.pathname}`);
-    } else {
-      document.body.style.overflow = '';
-      console.log(`[DEBUG_LOCK] isAssistantOpen is false: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
-      
-      // Log all elements matching fixed patterns to check for any invisible overlay remaining in DOM
+    if (!isAssistantOpen) {
+      console.log("[DEBUG_LOCK] document.scrollingElement:", document.scrollingElement);
+      console.log("[DEBUG_LOCK] document.body.scrollHeight:", document.body.scrollHeight);
+      console.log("[DEBUG_LOCK] document.documentElement.scrollHeight:", document.documentElement.scrollHeight);
+
       setTimeout(() => {
         const fixedStyleElements = document.querySelectorAll('[style*="position: fixed"]');
         const fixedClassElements = document.querySelectorAll('.fixed');
-        console.log(`[DEBUG_LOCK] Elements with position: fixed in styles:`, Array.from(fixedStyleElements).map(el => ({
+        console.log("[DEBUG_LOCK] Elements with position: fixed in styles:", Array.from(fixedStyleElements).map(el => ({
           tagName: el.tagName,
           id: el.id,
           className: el.className
         })));
-        console.log(`[DEBUG_LOCK] Elements with .fixed class:`, Array.from(fixedClassElements).map(el => ({
+        console.log("[DEBUG_LOCK] Elements with .fixed class:", Array.from(fixedClassElements).map(el => ({
           tagName: el.tagName,
           id: el.id,
           className: el.className
         })));
       }, 300);
     }
-
-    return () => {
-      document.body.style.overflow = '';
-      console.log(`[DEBUG_LOCK] cleanup: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
-    };
   }, [isAssistantOpen, location.pathname]);
 
   // Escape key event listener to close drawers globally
@@ -520,34 +510,22 @@ export default function RootLayout() {
                 </header>
 
                 {/* Content area */}
-                <main className={`flex-1 px-4 sm:px-6 md:px-8 py-8 max-w-[1400px] w-full mx-auto ${
-                  (isAssistantOpen && isTablet) || (isMobileMenuOpen && isMobile)
-                    ? 'overflow-hidden'
-                    : 'overflow-y-auto'
-                }`}>
+                <main className="flex-1 px-4 sm:px-6 md:px-8 py-8 max-w-[1400px] w-full mx-auto overflow-y-auto">
                   <Outlet />
                 </main>
               </div>
 
-              {/* Assistant Backdrop */}
-              {isAssistantOpen && isTablet && (
-                <div
-                  onClick={() => setIsAssistantOpen(false)}
-                  className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-40 pointer-events-auto"
-                />
-              )}
-
-              {/* Right Side: AI Chat Assistant Drawer (Desktop & Mobile) */}
+              {/* Right Side: AI Chat Assistant Panel (Rendered as simple side-by-side div with no animations or backdrops) */}
               {isAssistantOpen && (
-                <aside
-                  className={`fixed inset-y-0 right-0 z-50 w-80 flex flex-col border-l shadow-2xl lg:shadow-none lg:static lg:z-30 lg:h-screen lg:sticky lg:top-0 overflow-hidden ${
+                <div
+                  className={`w-80 flex flex-col border-l shrink-0 ${
                     theme === 'dark' 
-                      ? 'border-zinc-900 bg-[#09090b] lg:bg-[#09090b]/10 lg:backdrop-blur-md' 
-                      : 'border-zinc-200 bg-[#FFFFFF] lg:bg-[#FFFFFF]/60 lg:backdrop-blur-md shadow-sm'
+                      ? 'border-zinc-900 bg-[#09090b]' 
+                      : 'border-zinc-200 bg-[#FFFFFF]'
                   }`}
                 >
                   <AIChatPanel onClose={() => setIsAssistantOpen(false)} />
-                </aside>
+                </div>
               )}
 
             </div>
