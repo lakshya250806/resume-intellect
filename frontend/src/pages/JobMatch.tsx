@@ -95,7 +95,7 @@ export default function JobMatch() {
         <div className="lg:col-span-5 space-y-6">
           
           {/* Active File banner */}
-          <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/20 flex items-center justify-between shadow-sm">
+          <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900/80 flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-3 min-w-0">
               <div className="p-2 rounded-lg bg-[#F4F4F5] dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-850 text-[#71717A] dark:text-zinc-400 shrink-0">
                 <FileText className="w-3.5 h-3.5" />
@@ -114,7 +114,7 @@ export default function JobMatch() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-5 shadow-sm hover:shadow-md transition-shadow">
+          <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-5 shadow-sm hover:shadow-md transition-shadow">
             <div className="space-y-2">
               <label htmlFor="jd-input" className="text-[10px] font-bold text-[#71717A] dark:text-zinc-400 uppercase tracking-widest block">
                 Job Description Text
@@ -167,7 +167,7 @@ export default function JobMatch() {
           
           {isJdMatching ? (
             // Loading skeleton state
-            <div className="border border-zinc-200 dark:border-zinc-900 rounded-2xl bg-white dark:bg-zinc-955/20 p-8 min-h-[380px] flex flex-col items-center justify-center text-center gap-5 shadow-sm">
+            <div className="border border-zinc-200 dark:border-zinc-900 rounded-2xl bg-white dark:bg-zinc-900/80 p-8 min-h-[380px] flex flex-col items-center justify-center text-center gap-5 shadow-sm">
               <div className="relative flex items-center justify-center w-12 h-12">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-zinc-100 dark:bg-zinc-800 animate-ping opacity-75"></span>
                 <div className="relative w-8 h-8 rounded-full border border-zinc-300 border-t-zinc-600 dark:border-zinc-700 dark:border-t-zinc-400 animate-spin"></div>
@@ -182,7 +182,7 @@ export default function JobMatch() {
             <div className="space-y-8">
               
               {/* Dial Score Panel */}
-              <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-zinc-100 dark:bg-zinc-800/5 rounded-full blur-xl pointer-events-none" />
                 
                 {/* SVG Dial */}
@@ -242,7 +242,7 @@ export default function JobMatch() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                 
                 {/* Keywords Proportion Pie Chart */}
-                <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
                   <div className="pb-3 border-b border-zinc-200 dark:border-zinc-900/60 mb-2">
                     <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Proportional Split</span>
                     <span className="text-xs text-[#71717A] dark:text-zinc-400 font-light">Present vs missing required keywords</span>
@@ -283,7 +283,7 @@ export default function JobMatch() {
                 </div>
 
                 {/* Analytical Gap Progress Index */}
-                <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
                   <div className="pb-3 border-b border-zinc-200 dark:border-zinc-900/60 mb-3">
                     <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Gap progress index</span>
                     <span className="text-xs text-[#71717A] dark:text-zinc-400 font-light">Categorical keyword gaps calculated</span>
@@ -320,7 +320,7 @@ export default function JobMatch() {
               </div>
 
               {/* Missing keywords card */}
-              <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-2 pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                   <Bookmark className="w-3.5 h-3.5 text-[#71717A] dark:text-zinc-550" />
                   <h3 className="text-xs font-bold text-[#09090B] dark:text-zinc-300 uppercase tracking-widest">Recommended Keywords</h3>
@@ -338,7 +338,7 @@ export default function JobMatch() {
               </div>
 
               {/* Suggestions card */}
-              <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-2 pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                   <Compass className="w-3.5 h-3.5 text-[#71717A] dark:text-zinc-550" />
                   <h3 className="text-xs font-bold text-[#09090B] dark:text-zinc-300 uppercase tracking-widest">Alignment Recommendations</h3>
@@ -358,7 +358,7 @@ export default function JobMatch() {
             </div>
           ) : (
             // Awaiting Job Description Card
-            <div className="border border-zinc-200 dark:border-zinc-900 border-dashed rounded-2xl bg-white dark:bg-zinc-950/10 p-8 min-h-[380px] flex flex-col items-center justify-center text-center shadow-sm">
+            <div className="border border-zinc-200 dark:border-zinc-900 border-dashed rounded-2xl bg-white dark:bg-zinc-900/40 p-8 min-h-[380px] flex flex-col items-center justify-center text-center shadow-sm">
               <div className="p-3.5 rounded-xl bg-[#F4F4F5] dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[#71717A] dark:text-zinc-500 mb-4">
                 <Compass className="w-5 h-5" />
               </div>

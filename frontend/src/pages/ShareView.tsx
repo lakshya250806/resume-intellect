@@ -142,7 +142,7 @@ export default function ShareView() {
       {/* Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Circular SVG Gauge */}
-        <div className="lg:col-span-4 bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between min-h-[320px] relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        <div className="lg:col-span-4 bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between min-h-[320px] relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
           <div>
             <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">ATS Rating</span>
             <span className="text-xs text-[#71717A] dark:text-zinc-400 font-light">Compliance rating grade</span>
@@ -185,7 +185,7 @@ export default function ShareView() {
 
         {/* Strengths & Gaps */}
         <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
             <div className="space-y-4">
               <div className="flex items-center gap-2 pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                 <div className="p-1 rounded bg-emerald-55 border border-emerald-250 text-emerald-650 dark:bg-emerald-950/20 dark:border-emerald-900/50 dark:text-emerald-400">
@@ -204,7 +204,7 @@ export default function ShareView() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
             <div className="space-y-4">
               <div className="flex items-center gap-2 pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                 <div className="p-1 rounded bg-rose-50 border border-rose-250 text-rose-600 dark:bg-rose-955/20 dark:border-rose-900/50 dark:text-rose-400">
@@ -226,7 +226,7 @@ export default function ShareView() {
       </div>
 
       {/* Skills */}
-      <section className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+      <section className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
         <div className="pb-3 border-b border-zinc-200 dark:border-zinc-900/60 mb-5">
           <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Skills</span>
         </div>
@@ -239,10 +239,10 @@ export default function ShareView() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <ATSBreakdown data={breakdown} />
         </div>
-        <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <SkillDistribution radarData={sharedData.radar_chart} />
         </div>
       </div>

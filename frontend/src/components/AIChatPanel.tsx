@@ -198,7 +198,7 @@ export default function AIChatPanel({ onClose }: { onClose?: () => void }) {
                         ? 'bg-zinc-900 text-zinc-100 border border-zinc-800 rounded-br-none shadow-sm'
                         : 'bg-[#09090B] text-white border border-[#09090B] rounded-br-none shadow-sm'
                       : theme === 'dark'
-                        ? 'bg-zinc-950/20 text-zinc-300 rounded-bl-none border border-zinc-900/60'
+                        ? 'bg-zinc-900/80 text-zinc-100 rounded-bl-none border border-zinc-900/60'
                         : 'bg-white text-[#09090B] rounded-bl-none border border-zinc-200 shadow-sm'
                   }`}>
                     {/* Process bold lines and code blocks */}
@@ -223,7 +223,7 @@ export default function AIChatPanel({ onClose }: { onClose?: () => void }) {
               <div className="flex w-full justify-start">
                 <div className={`p-3 rounded-2xl text-xs rounded-bl-none flex items-center gap-1.5 ${
                   theme === 'dark' 
-                    ? 'bg-zinc-950/20 border border-zinc-900/60 text-zinc-500' 
+                    ? 'bg-zinc-900/80 border border-zinc-900/60 text-zinc-400' 
                     : 'bg-white border border-zinc-200 text-[#71717A] shadow-sm'
                 }`}>
                   <span className="h-1.5 w-1.5 rounded-full bg-current animate-bounce" />
@@ -244,7 +244,7 @@ export default function AIChatPanel({ onClose }: { onClose?: () => void }) {
               onClick={() => handleSend(p)}
               className={`text-[10px] p-2 rounded-xl border transition-all text-left font-medium leading-tight active:scale-[0.98] ${
                 theme === 'dark'
-                  ? 'text-zinc-400 border-zinc-900 bg-zinc-900/20 hover:border-zinc-800 hover:text-zinc-200 hover:bg-zinc-900/50'
+                  ? 'text-zinc-300 border-zinc-900 bg-zinc-900/60 hover:border-zinc-800 hover:text-white hover:bg-zinc-900/80'
                   : 'text-[#71717A] border-zinc-200 bg-white hover:border-zinc-350 hover:text-[#09090B] hover:bg-[#F4F4F5] shadow-sm'
               }`}
             >

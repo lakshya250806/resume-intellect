@@ -88,7 +88,7 @@ export default function Dashboard() {
         {/* Bento Grid Skeleton */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Gauge card */}
-          <div className="lg:col-span-4 bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 min-h-[320px] flex flex-col justify-between shadow-sm">
+          <div className="lg:col-span-4 bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 min-h-[320px] flex flex-col justify-between shadow-sm">
             <div className="space-y-2">
               <Skeleton className="h-4 w-24 rounded" />
               <Skeleton className="h-3.5 w-48 rounded" />
@@ -101,7 +101,7 @@ export default function Dashboard() {
 
           {/* Strengths / Gaps */}
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+            <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
               <div className="space-y-4">
                 <Skeleton className="h-5 w-32 rounded" />
                 <div className="space-y-2">
@@ -113,7 +113,7 @@ export default function Dashboard() {
               <Skeleton className="h-3.5 w-40 rounded" />
             </div>
 
-            <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+            <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
               <div className="space-y-4">
                 <Skeleton className="h-5 w-32 rounded" />
                 <div className="space-y-2">
@@ -128,7 +128,7 @@ export default function Dashboard() {
         </div>
 
         {/* Roadmap skeleton */}
-        <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-4 shadow-sm">
+        <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 space-y-4 shadow-sm">
           <Skeleton className="h-5 w-48 rounded" />
           <Skeleton className="h-4 w-96 rounded" />
           <div className="space-y-3 pt-2">
@@ -209,13 +209,13 @@ export default function Dashboard() {
           </button>
 
           {/* Tab Selection */}
-          <div className="flex p-0.5 rounded-xl border border-zinc-200 dark:border-zinc-900 bg-zinc-100 dark:bg-zinc-900/20">
+          <div className="flex p-0.5 rounded-xl border border-zinc-200 dark:border-zinc-900 bg-zinc-100 dark:bg-zinc-950/60">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
                 activeTab === 'overview' 
-                  ? 'bg-white text-[#09090B] dark:bg-zinc-800/80 dark:text-zinc-100 shadow-sm' 
-                  : 'text-[#71717A] hover:text-[#09090B] dark:text-zinc-500 dark:hover:text-zinc-350'
+                  ? 'bg-white text-zinc-900 dark:bg-zinc-100 dark:text-zinc-950 shadow-sm' 
+                  : 'bg-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
               }`}
               aria-label="Overview tab"
             >
@@ -224,10 +224,10 @@ export default function Dashboard() {
             </button>
             <button
               onClick={() => setActiveTab('tools')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
                 activeTab === 'tools' 
-                  ? 'bg-white text-[#09090B] dark:bg-zinc-800/80 dark:text-zinc-100 shadow-sm' 
-                  : 'text-[#71717A] hover:text-[#09090B] dark:text-zinc-500 dark:hover:text-zinc-350'
+                  ? 'bg-white text-zinc-900 dark:bg-zinc-100 dark:text-zinc-950 shadow-sm' 
+                  : 'bg-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
               }`}
               aria-label="AI Tools tab"
             >
@@ -264,7 +264,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
               
               {/* ATS Circle Gauge Card (Left, span 4) */}
-              <div className="lg:col-span-4 bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between min-h-[320px] relative overflow-hidden group shadow-sm hover:shadow-md transition-shadow">
+              <div className="lg:col-span-4 bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between min-h-[320px] relative overflow-hidden group shadow-sm hover:shadow-md transition-shadow">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-zinc-100 dark:bg-zinc-800/5 rounded-full blur-xl pointer-events-none" />
                 
                 <div className="flex justify-between items-start no-print">
@@ -319,7 +319,7 @@ export default function Dashboard() {
               <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                 
                 {/* Strengths Card */}
-                <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                       <div className="p-1 rounded bg-emerald-55 border border-emerald-200 text-emerald-600 dark:bg-emerald-950/20 dark:border-emerald-900/50 dark:text-emerald-400">
@@ -344,7 +344,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Gaps Card */}
-                <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                       <div className="p-1 rounded bg-rose-50 border border-rose-250 text-rose-600 dark:bg-rose-950/20 dark:border-rose-900/50 dark:text-rose-400">
@@ -379,7 +379,7 @@ export default function Dashboard() {
             <ResumeHeatmap />
 
             {/* 5. AI Optimization Steps Roadmap */}
-            <section className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 md:p-8 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+            <section className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 md:p-8 space-y-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center gap-2 pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                 <div className="p-1 rounded bg-purple-55 border border-purple-200 text-purple-650 dark:bg-purple-950/20 dark:border-purple-950 dark:text-purple-400">
                   <Lightbulb className="w-3.5 h-3.5" />
@@ -405,7 +405,7 @@ export default function Dashboard() {
             </section>
 
             {/* 6. Dynamic Skill Cloud tags */}
-            <section className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <section className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="pb-4 border-b border-zinc-200 dark:border-zinc-900/60 mb-5">
                 <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Core Skill Cloud</span>
                 <span className="text-xs text-[#71717A] dark:text-zinc-400 font-light">Dynamically parsed tags matching technical indexes</span>
@@ -424,7 +424,7 @@ export default function Dashboard() {
 
             {/* 7. Charts Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 page-break">
-              <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                 <div className="pb-4 border-b border-zinc-200 dark:border-zinc-900/60 mb-6">
                   <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Structural Breakdown</span>
                   <span className="text-xs text-[#71717A] dark:text-zinc-400 font-light">Grading of formatting syntax & contact parameters</span>
@@ -432,7 +432,7 @@ export default function Dashboard() {
                 <ATSBreakdown data={breakdown} />
               </div>
 
-              <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                 <div className="pb-4 border-b border-zinc-200 dark:border-zinc-900/60 mb-6">
                   <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Domain Coverage</span>
                   <span className="text-xs text-[#71717A] dark:text-zinc-400 font-light">Technical weight classification</span>
@@ -445,7 +445,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch page-break">
               
               {/* Work history */}
-              <div className="lg:col-span-7 bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+              <div className="lg:col-span-7 bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
                 <div className="space-y-6">
                   <div className="pb-3 border-b border-zinc-200 dark:border-zinc-900/60">
                     <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Parsed Timeline Feed</span>
@@ -475,7 +475,7 @@ export default function Dashboard() {
               <div className="lg:col-span-5 space-y-8 flex flex-col">
                 
                 {/* Education */}
-                <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex-grow shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex-grow shadow-sm hover:shadow-md transition-shadow">
                   <div className="pb-3 border-b border-zinc-200 dark:border-zinc-900/60 mb-4">
                     <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Education details</span>
                   </div>
@@ -496,7 +496,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Projects */}
-                <div className="bg-white dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex-grow shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-900 rounded-2xl p-6 flex-grow shadow-sm hover:shadow-md transition-shadow">
                   <div className="pb-3 border-b border-zinc-200 dark:border-zinc-900/60 mb-4">
                     <span className="text-[10px] font-bold text-[#71717A] dark:text-zinc-500 uppercase tracking-widest block">Portfolio Projects</span>
                   </div>
