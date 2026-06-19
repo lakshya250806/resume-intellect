@@ -19,7 +19,7 @@ import {
   X
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function RootLayout() {
   const { 
@@ -66,16 +66,38 @@ export default function RootLayout() {
 
   // Simple body overflow handling for AI assistant drawer
   useEffect(() => {
+    console.log(`[DEBUG_LOCK] isAssistantOpen: ${isAssistantOpen}`);
+    console.log(`[DEBUG_LOCK] document.body.style.overflow: "${document.body.style.overflow}"`);
+    console.log(`[DEBUG_LOCK] document.documentElement.style.overflow: "${document.documentElement.style.overflow}"`);
+    console.log(`[DEBUG_LOCK] window.scrollY: ${window.scrollY}`);
+
     if (isAssistantOpen) {
       document.body.style.overflow = 'hidden';
-      console.log(`[DEBUG] isAssistantOpen is true: set document.body.style.overflow to 'hidden'. Pathname: ${location.pathname}`);
+      console.log(`[DEBUG_LOCK] isAssistantOpen is true: set document.body.style.overflow to 'hidden'. Pathname: ${location.pathname}`);
     } else {
       document.body.style.overflow = '';
-      console.log(`[DEBUG] isAssistantOpen is false: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
+      console.log(`[DEBUG_LOCK] isAssistantOpen is false: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
+      
+      // Log all elements matching fixed patterns to check for any invisible overlay remaining in DOM
+      setTimeout(() => {
+        const fixedStyleElements = document.querySelectorAll('[style*="position: fixed"]');
+        const fixedClassElements = document.querySelectorAll('.fixed');
+        console.log(`[DEBUG_LOCK] Elements with position: fixed in styles:`, Array.from(fixedStyleElements).map(el => ({
+          tagName: el.tagName,
+          id: el.id,
+          className: el.className
+        })));
+        console.log(`[DEBUG_LOCK] Elements with .fixed class:`, Array.from(fixedClassElements).map(el => ({
+          tagName: el.tagName,
+          id: el.id,
+          className: el.className
+        })));
+      }, 300);
     }
+
     return () => {
       document.body.style.overflow = '';
-      console.log(`[DEBUG] cleanup: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
+      console.log(`[DEBUG_LOCK] cleanup: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
     };
   }, [isAssistantOpen, location.pathname]);
 
@@ -344,34 +366,21 @@ export default function RootLayout() {
             </div>
           </motion.aside>
 
-            {/* Mobile menu backdrop with exit animation tracking */}
-            <AnimatePresence mode="wait">
-              {isMobileMenuOpen && isMobile && (
-                <motion.div
-                  key="mobile-menu-backdrop"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, pointerEvents: 'none' }}
-                  transition={{ duration: 0.2 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-40 pointer-events-auto"
-                />
-              )}
-            </AnimatePresence>
+            {/* Mobile menu backdrop */}
+            {isMobileMenuOpen && isMobile && (
+              <div
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-40 pointer-events-auto"
+              />
+            )}
 
-            {/* Mobile Drawer (Framer Motion slide-in) with exit animation tracking */}
-            <AnimatePresence mode="wait">
-              {isMobileMenuOpen && isMobile && (
-                <motion.div
-                  key="mobile-nav-drawer"
-                  initial={{ x: '-100%' }}
-                  animate={{ x: 0 }}
-                  exit={{ x: '-100%', pointerEvents: 'none' }}
-                  transition={{ type: 'spring', damping: 25 }}
-                  className={`fixed inset-y-0 left-0 w-64 border-r z-50 flex flex-col p-4 ${
-                    theme === 'dark' ? 'bg-[#09090b] border-zinc-850' : 'bg-[#FFFFFF] border-zinc-200'
-                  }`}
-                >
+            {/* Mobile Drawer (slide-in) */}
+            {isMobileMenuOpen && isMobile && (
+              <div
+                className={`fixed inset-y-0 left-0 w-64 border-r z-50 flex flex-col p-4 ${
+                  theme === 'dark' ? 'bg-[#09090b] border-zinc-855' : 'bg-[#FFFFFF] border-zinc-200'
+                }`}
+              >
                 <div className="flex justify-between items-center mb-6">
                   <div className="flex items-center gap-2">
                     <Cpu className="w-4 h-4 text-purple-400" />
@@ -450,9 +459,8 @@ export default function RootLayout() {
                     <span>Exit Workspace</span>
                   </button>
                 </div>
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
 
             {/* Main workspace container */}
             <div className="flex-1 flex min-w-0 relative">
@@ -521,40 +529,26 @@ export default function RootLayout() {
                 </main>
               </div>
 
-              {/* Assistant Backdrop with exit animation tracking */}
-              <AnimatePresence mode="wait">
-                {isAssistantOpen && isTablet && (
-                  <motion.div
-                    key="assistant-backdrop"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, pointerEvents: 'none' }}
-                    transition={{ duration: 0.2 }}
-                    onClick={() => setIsAssistantOpen(false)}
-                    className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-40 pointer-events-auto"
-                  />
-                )}
-              </AnimatePresence>
+              {/* Assistant Backdrop */}
+              {isAssistantOpen && isTablet && (
+                <div
+                  onClick={() => setIsAssistantOpen(false)}
+                  className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-40 pointer-events-auto"
+                />
+              )}
 
-              {/* Right Side: AI Chat Assistant Drawer (Desktop & Mobile) with responsive transitions */}
-              <AnimatePresence mode="wait">
-                {isAssistantOpen && (
-                  <motion.aside
-                    key="assistant-aside"
-                    initial={isTablet ? { x: '100%', opacity: 0 } : { width: 0, opacity: 0 }}
-                    animate={isTablet ? { x: 0, opacity: 1 } : { width: 320, opacity: 1 }}
-                    exit={isTablet ? { x: '100%', opacity: 0, pointerEvents: 'none' } : { width: 0, opacity: 0, pointerEvents: 'none' }}
-                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                    className={`fixed inset-y-0 right-0 z-50 w-80 flex flex-col border-l shadow-2xl lg:shadow-none lg:static lg:z-30 lg:h-screen lg:sticky lg:top-0 overflow-hidden ${
-                      theme === 'dark' 
-                        ? 'border-zinc-900 bg-[#09090b] lg:bg-[#09090b]/10 lg:backdrop-blur-md' 
-                        : 'border-zinc-200 bg-[#FFFFFF] lg:bg-[#FFFFFF]/60 lg:backdrop-blur-md shadow-sm'
-                    }`}
-                  >
-                    <AIChatPanel onClose={() => setIsAssistantOpen(false)} />
-                  </motion.aside>
-                )}
-              </AnimatePresence>
+              {/* Right Side: AI Chat Assistant Drawer (Desktop & Mobile) */}
+              {isAssistantOpen && (
+                <aside
+                  className={`fixed inset-y-0 right-0 z-50 w-80 flex flex-col border-l shadow-2xl lg:shadow-none lg:static lg:z-30 lg:h-screen lg:sticky lg:top-0 overflow-hidden ${
+                    theme === 'dark' 
+                      ? 'border-zinc-900 bg-[#09090b] lg:bg-[#09090b]/10 lg:backdrop-blur-md' 
+                      : 'border-zinc-200 bg-[#FFFFFF] lg:bg-[#FFFFFF]/60 lg:backdrop-blur-md shadow-sm'
+                  }`}
+                >
+                  <AIChatPanel onClose={() => setIsAssistantOpen(false)} />
+                </aside>
+              )}
 
             </div>
           </div>
