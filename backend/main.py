@@ -36,6 +36,19 @@ app = FastAPI(
     version="1.0.0"
 )
 
+origins = [
+    "http://localhost:5173",
+    "https://resume-intellect-hazel.vercel.app"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Exception handlers
 @app.exception_handler(GeminiAPIException)
 async def gemini_api_exception_handler(request: Request, exc: GeminiAPIException):
@@ -75,19 +88,6 @@ async def runtime_error_handler(request: Request, exc: RuntimeError):
         content={"detail": str(exc), "service": "parser"}
     )
 
-# Hardened CORS configuration
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:5174"
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # In-Memory Rate Limiter
 class InMemoryRateLimiter:
