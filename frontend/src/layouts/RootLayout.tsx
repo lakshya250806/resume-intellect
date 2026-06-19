@@ -56,20 +56,28 @@ export default function RootLayout() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Manage body scroll locking to prevent background scrolling (scroll leak) on mobile/tablet
+  // Close menu and assistant when isAppView becomes false (navigating away)
   useEffect(() => {
-    const isLocked = isAppView && ((isAssistantOpen && isTablet) || (isMobileMenuOpen && isMobile));
-    
-    if (isLocked) {
-      const originalOverflow = document.body.style.overflow;
+    if (!isAppView) {
+      setIsAssistantOpen(false);
+      setIsMobileMenuOpen(false);
+    }
+  }, [isAppView]);
+
+  // Simple body overflow handling for AI assistant drawer
+  useEffect(() => {
+    if (isAssistantOpen) {
       document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = originalOverflow;
-      };
+      console.log(`[DEBUG] isAssistantOpen is true: set document.body.style.overflow to 'hidden'. Pathname: ${location.pathname}`);
     } else {
       document.body.style.overflow = '';
+      console.log(`[DEBUG] isAssistantOpen is false: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
     }
-  }, [isAppView, isAssistantOpen, isTablet, isMobileMenuOpen, isMobile]);
+    return () => {
+      document.body.style.overflow = '';
+      console.log(`[DEBUG] cleanup: restored document.body.style.overflow to ''. Pathname: ${location.pathname}`);
+    };
+  }, [isAssistantOpen, location.pathname]);
 
   // Escape key event listener to close drawers globally
   useEffect(() => {
@@ -337,7 +345,7 @@ export default function RootLayout() {
           </motion.aside>
 
             {/* Mobile menu backdrop with exit animation tracking */}
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {isMobileMenuOpen && isMobile && (
                 <motion.div
                   key="mobile-menu-backdrop"
@@ -352,7 +360,7 @@ export default function RootLayout() {
             </AnimatePresence>
 
             {/* Mobile Drawer (Framer Motion slide-in) with exit animation tracking */}
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {isMobileMenuOpen && isMobile && (
                 <motion.div
                   key="mobile-nav-drawer"
@@ -514,7 +522,7 @@ export default function RootLayout() {
               </div>
 
               {/* Assistant Backdrop with exit animation tracking */}
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 {isAssistantOpen && isTablet && (
                   <motion.div
                     key="assistant-backdrop"
@@ -529,7 +537,7 @@ export default function RootLayout() {
               </AnimatePresence>
 
               {/* Right Side: AI Chat Assistant Drawer (Desktop & Mobile) with responsive transitions */}
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 {isAssistantOpen && (
                   <motion.aside
                     key="assistant-aside"
