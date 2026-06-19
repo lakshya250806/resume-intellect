@@ -49,13 +49,7 @@ export default function AIChatPanel({ onClose }: { onClose?: () => void }) {
     "Improve my resume summary.",
   ];
 
-  const scrollToBottom = (behavior: 'smooth' | 'auto' = 'smooth') => {
-    messagesEndRef.current?.scrollIntoView({ behavior });
-  };
-
-  useEffect(() => {
-    scrollToBottom(isTyping ? 'auto' : 'smooth');
-  }, [messages, isTyping]);
+  // Auto-scrolling logic completely disabled to prevent layout scroll-locking/jumping issues.
 
   const handleSend = async (text: string) => {
     if (!text.trim()) return;

@@ -515,10 +515,10 @@ export default function RootLayout() {
                 </main>
               </div>
 
-              {/* Right Side: AI Chat Assistant Panel (Rendered as simple side-by-side div with no animations or backdrops) */}
+              {/* Right Side: AI Chat Assistant Panel (Rendered fixed right 0 top 0 h-screen w-80 z-50 overflow-y-auto) */}
               {isAssistantOpen && (
                 <div
-                  className={`w-80 flex flex-col border-l shrink-0 ${
+                  className={`fixed right-0 top-0 h-screen w-80 z-50 flex flex-col border-l shadow-2xl overflow-y-auto ${
                     theme === 'dark' 
                       ? 'border-zinc-900 bg-[#09090b]' 
                       : 'border-zinc-200 bg-[#FFFFFF]'
