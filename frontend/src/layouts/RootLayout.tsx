@@ -204,7 +204,7 @@ export default function RootLayout() {
             </div>
 
             {/* Sidebar Body */}
-            <div className="flex-1 py-4 px-3 overflow-y-auto">
+            <div className="flex-1 pt-4 pb-32 px-3 overflow-y-auto">
               <div className="space-y-6">
                 
                 {/* Primary Nav Links */}
@@ -320,41 +320,47 @@ export default function RootLayout() {
               </div>
             </div>
 
-            {/* Sidebar Footer */}
-            <div className={`border-t p-3 shrink-0 space-y-4 bg-inherit ${
-              theme === 'dark' ? 'border-zinc-900' : 'border-zinc-200'
+            {/* Sidebar Footer (Fixed at the bottom-left corner of the viewport/sidebar) */}
+            <div className={`fixed left-0 bottom-0 z-50 border-t p-3 transition-all duration-300 ${
+              isSidebarOpen ? 'w-[240px]' : 'w-[64px]'
+            } ${
+              theme === 'dark' 
+                ? 'border-zinc-900 bg-[#09090b]/95 backdrop-blur-md' 
+                : 'border-zinc-200 bg-[#FFFFFF]'
             }`}>
-              {/* Theme Switcher in Sidebar */}
-              <button
-                onClick={toggleTheme}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg text-xs w-full transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
-                  theme === 'dark' ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60' : 'text-[#71717A] hover:text-[#09090B] hover:bg-[#F4F4F5]/60'
-                }`}
-                aria-label="Toggle dark/light theme"
-              >
-                {theme === 'dark' ? (
-                  <>
-                    <Sun className="w-4 h-4 text-zinc-400" />
-                    {isSidebarOpen && <span>Light Mode</span>}
-                  </>
-                ) : (
-                  <>
-                    <Moon className="w-4 h-4 text-zinc-550" />
-                    {isSidebarOpen && <span>Dark Mode</span>}
-                  </>
-                )}
-              </button>
+              <div className="space-y-4">
+                {/* Theme Switcher in Sidebar */}
+                <button
+                  onClick={toggleTheme}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-xs w-full transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
+                    theme === 'dark' ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60' : 'text-[#71717A] hover:text-[#09090B] hover:bg-[#F4F4F5]/60'
+                  }`}
+                  aria-label="Toggle dark/light theme"
+                >
+                  {theme === 'dark' ? (
+                    <>
+                      <Sun className="w-4 h-4 text-zinc-400" />
+                      {isSidebarOpen && <span>Light Mode</span>}
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="w-4 h-4 text-zinc-550" />
+                      {isSidebarOpen && <span>Dark Mode</span>}
+                    </>
+                  )}
+                </button>
 
-              <button
-                onClick={handleReset}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg text-xs w-full transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
-                  theme === 'dark' ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60' : 'text-[#71717A] hover:text-[#09090B] hover:bg-[#F4F4F5]/60'
-                }`}
-                aria-label="Exit current workspace and return to home"
-              >
-                <LogOut className="w-4 h-4 text-zinc-550" />
-                {isSidebarOpen && <span>Exit Workspace</span>}
-              </button>
+                <button
+                  onClick={handleReset}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-xs w-full transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500 ${
+                    theme === 'dark' ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60' : 'text-[#71717A] hover:text-[#09090B] hover:bg-[#F4F4F5]/60'
+                  }`}
+                  aria-label="Exit current workspace and return to home"
+                >
+                  <LogOut className="w-4 h-4 text-zinc-550" />
+                  {isSidebarOpen && <span>Exit Workspace</span>}
+                </button>
+              </div>
             </div>
           </motion.aside>
 
